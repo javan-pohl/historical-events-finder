@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import axios from 'axios';
 import Search from './Search.js';
-import Results from './Results.js';
+import List from './List.js';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -26,15 +26,33 @@ function App() {
     console.log('submit button pressed')
     fetchResults();
   }
-
+  function renderPage() {
+    if(searchResults.length) {
+      return (
+        <React.Fragment>
+          <Search
+          value={searchTerm}
+          onChange={handleSearchChange}
+          onSubmit={handleSubmit}
+          />
+          <List
+            list={searchResults}
+          />
+        </React.Fragment>
+      )
+    } else {
+      return (
+        <Search
+          value={searchTerm}
+          onChange={handleSearchChange}
+          onSubmit={handleSubmit}      
+        />
+      )
+    }
+  }
   return (
     <div className="main">
-      <Search
-        value={searchTerm}
-        onChange={handleSearchChange}
-        onSubmit={handleSubmit}
-      />
-      <Results />
+      {renderPage()}
     </div>
   )
 }

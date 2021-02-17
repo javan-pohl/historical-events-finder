@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Results = () => {
+const List = () => {
   return (
     <div className="search-results">
-
+      This is list
     </div>
   )
 }
 
-export default Results;
+export default List;
