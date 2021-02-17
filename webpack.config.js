@@ -20,15 +20,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
-  entry: './client/components/index.js',
+  entry: './client/components',
 
   output: {
     path: path.resolve(__dirname, 'public')
   },
-
-  plugins: [new webpack.ProgressPlugin(), new HtmlWebpackPlugin({
-            template: 'index.html'
-          })],
 
   module: {
     rules: [{
@@ -53,5 +49,9 @@ module.exports = {
   devServer: {
     open: true,
     host: 'localhost'
+  },
+  mode: 'development',
+  resolve: {
+    extensions: ['.js', '.jsx']
   }
 }
