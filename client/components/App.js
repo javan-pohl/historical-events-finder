@@ -4,14 +4,17 @@ import Search from './Search.js';
 import List from './List.js';
 
 function App() {
+  const [page, setPage] = useState(1);
   const [ready, setReady] = useState(false);
+  const [perPage, setPerPage] = useState(8);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
   function fetchResults() {
     // will need to reconfigure to include searchterm but let's test first
     // let query = `http://localhost:3000/posts?date=-300`;
-    let query = `http://localhost:3000/posts?q=${searchTerm}`;
+    // let query = `http://localhost:3000/posts?_page=${page}&_limit=${perPage}q=${searchTerm}`;
+    let query = `http://localhost:3000/posts?q=${searchTerm}&_page=${page}&_limit=${perPage}`;
     console.log('query: ', query);
     axios.get(query)
       .then(data => {

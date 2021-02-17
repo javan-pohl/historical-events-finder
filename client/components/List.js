@@ -9,7 +9,7 @@ const List = ({list}) => {
     )
   })
   return (
-    <div className="search-results">
+    <div className="search-results padding-bottom-15px">
       {results}
     </div>
   )
