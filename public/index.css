@@ -1,0 +1,15 @@
+
+
+input[type="text"], textarea {
+  background-color: grey;;
+}
+
+.color-green {
+  color: green;
+}
+.main{
+  height: 1800px;
+  width: 90%;
+  margin: auto;
+  background-color: grey;
+}
