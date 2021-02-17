@@ -21,7 +21,7 @@ const Search = ({value, onChange, onSubmit}) => {
             />
           </label>
 
-          <input type="submit" value="Submit" class="color-green" />
+          <input type="submit" value="Submit" className="color-green" />
         </form>
       </div>
     </div>
