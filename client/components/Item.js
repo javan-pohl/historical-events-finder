@@ -4,7 +4,7 @@ const Item = ({item}) => {
   console.log('item: ', item);
   return (
     <div className="event flex-parent flex-column" >
-       <div className="event-date-row flex-parent flex-row">
+       <div className="event-row event-date-row flex-parent flex-row">
         <div className="event-date-header">
           Date:
         </div>
@@ -12,7 +12,7 @@ const Item = ({item}) => {
           {item.date}
         </div>
        </div>
-       <div className="event-desc-row flex-parent flex-row">
+       <div className="event-row event-desc-row flex-parent flex-row">
         <div className="event-desc-header">
           Desc:
         </div>
@@ -20,7 +20,7 @@ const Item = ({item}) => {
           {item.description}
         </div>
        </div>
-       <div className="event-topic-row flex-parent flex-row">
+       <div className="event-row event-topic-row flex-parent flex-row">
         <div className="event-topic-header">
           Topic:
         </div>
