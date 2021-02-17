@@ -8,7 +8,8 @@ input[type="text"], textarea {
   color: green;
 }
 .main{
-  height: 1800px;
+  height: auto;
+  min-height: 800px;
   width: 90%;
   margin: auto;
   background-color: grey;

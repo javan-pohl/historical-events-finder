@@ -10,7 +10,9 @@ function App() {
 
   function fetchResults() {
     // will need to reconfigure to include searchterm but let's test first
-    let query = `http://localhost:3000/posts?date=-300`
+    // let query = `http://localhost:3000/posts?date=-300`;
+    let query = `http://localhost:3000/posts?q=${searchTerm}`;
+    console.log('query: ', query);
     axios.get(query)
       .then(data => {
         console.log('search results: ', data);
