@@ -4,6 +4,7 @@ import Search from './Search.js';
 import List from './List.js';
 
 function App() {
+  const [ready, setReady] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
@@ -13,30 +14,36 @@ function App() {
     axios.get(query)
       .then(data => {
         console.log('search results: ', data);
-        setSearchResults(data);
+        setSearchResults(data.data);
+        setReady(true);
       })
       .catch(err => console.log('fetch error: ', err));
   }
+
   function handleSearchChange(e) {
     console.log(e.target.value);
     setSearchTerm(e.target.value);
   }
+
   function handleSubmit(e) {
     e.preventDefault();
     console.log('submit button pressed')
     fetchResults();
   }
+
   function renderPage() {
-    if(searchResults.length) {
+    if(ready) {
       return (
         <React.Fragment>
           <Search
-          value={searchTerm}
-          onChange={handleSearchChange}
-          onSubmit={handleSubmit}
+            value={searchTerm}
+            onChange={handleSearchChange}
+            onSubmit={handleSubmit}
+            display={ready}
           />
           <List
             list={searchResults}
+            display={ready}
           />
         </React.Fragment>
       )
@@ -46,7 +53,8 @@ function App() {
           value={searchTerm}
           onChange={handleSearchChange}
           onSubmit={handleSubmit}      
-        />
+          display={ready}
+          />
       )
     }
   }

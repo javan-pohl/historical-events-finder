@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Search = ({value, onChange, onSubmit}) => {
-  console.log('in Search');
   return (
     <div id="search" className="centered flex-parent flex-wrap-no flex-align-center flex-center">
       <div>
