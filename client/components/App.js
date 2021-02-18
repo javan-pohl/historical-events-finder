@@ -17,7 +17,7 @@ function App() {
     let query = `http://localhost:3000/posts?q=${searchTerm}&_page=${ourPage}&_limit=${perPage}`;
     axios.get(query)
       .then(data => {
-        console.log('search results: ', data);
+        // console.log('search results: ', data);
         setSearchResults(data.data);
         // setReady(true);
         getLastPage(data.headers.link);
@@ -26,18 +26,18 @@ function App() {
   }
   
   function getLastPage(headerLink) {
-    console.log('headerLink: ', headerLink);
+    // console.log('headerLink: ', headerLink);
     let arr = headerLink.split(',');
-    console.log('header arr: ', arr);
+    // console.log('header arr: ', arr);
     let str = arr[arr.length - 1].substring(arr[2].indexOf('page=') + 5, arr[arr.length - 1].indexOf('&_limit'));
-    console.log('str: ', str);
-    console.log(parseInt(str))
+    // console.log('str: ', str);
+    // console.log(parseInt(str))
     setLastPage(parseInt(str))
     setReady(true);
   }
   
   function handlePageClick(data) {
-    console.log('page clicked: ', data.selected + 1);
+    // console.log('page clicked: ', data.selected + 1);
     let newPage = data.selected + 1;
     setReady(false);
     setPage(parseInt(newPage));
@@ -45,13 +45,13 @@ function App() {
   }
 
   function handleSearchChange(e) {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setSearchTerm(e.target.value);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log('submit button pressed')
+    // console.log('submit button pressed')
     fetchResults();
   }
 

@@ -7,6 +7,21 @@ const Item = ({item}) => {
     description = description.substring(0, description.indexOf('ampamp'));
   }
   // console.log('item: ', item);
+
+  function renderTopic() {
+    if (item.category2) {
+      return (
+        <div className="event-row event-topic-row flex-parent flex-row">
+        <div className="event-topic-header">
+          Topic:
+        </div>
+        <div className="event-topic margin-left-15px">
+          {item.category2}
+        </div>
+       </div>
+      )
+    } 
+  }
   return (
     <div className="event flex-parent flex-column" >
        <div className="event-row event-date-row flex-parent flex-row">
@@ -25,14 +40,7 @@ const Item = ({item}) => {
           {description}
         </div>
        </div>
-       <div className="event-row event-topic-row flex-parent flex-row">
-        <div className="event-topic-header">
-          Topic:
-        </div>
-        <div className="event-topic margin-left-15px">
-          {item.category2}
-        </div>
-       </div>
+      {renderTopic()}
     </div>
   )
 }
