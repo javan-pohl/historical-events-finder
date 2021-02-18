@@ -12,8 +12,9 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
-  function fetchResults() {
-    let query = `http://localhost:3000/posts?q=${searchTerm}&_page=${page}&_limit=${perPage}`;
+  function fetchResults(pageInput) {
+    let ourPage = pageInput || page;
+    let query = `http://localhost:3000/posts?q=${searchTerm}&_page=${ourPage}&_limit=${perPage}`;
     axios.get(query)
       .then(data => {
         console.log('search results: ', data);
@@ -25,18 +26,22 @@ function App() {
   }
   
   function getLastPage(headerLink) {
-    // console.log('headerLink: ', headerLink);
+    console.log('headerLink: ', headerLink);
     let arr = headerLink.split(',');
-    // console.log('header arr: ', arr);
-    let str = arr[2].substring(arr[2].indexOf('page=') + 5, arr[2].indexOf('&_limit'));
-    // console.log('str: ', str);
-    // console.log(parseInt(str))
+    console.log('header arr: ', arr);
+    let str = arr[arr.length - 1].substring(arr[2].indexOf('page=') + 5, arr[arr.length - 1].indexOf('&_limit'));
+    console.log('str: ', str);
+    console.log(parseInt(str))
     setLastPage(parseInt(str))
     setReady(true);
   }
   
   function handlePageClick(data) {
     console.log('page clicked: ', data.selected + 1);
+    let newPage = data.selected + 1;
+    setReady(false);
+    setPage(parseInt(newPage));
+    fetchResults(newPage);
   }
 
   function handleSearchChange(e) {
@@ -66,17 +71,19 @@ function App() {
           />
           <div className="pagination-main">
           <ReactPaginate
-              previousLabel={'previous'}
-              nextLabel={'next'}
+              activeClassName={'active'}
               breakLabel={'...'}
               breakClassName={'break-me'}
-              pageCount={lastPage}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={handlePageClick}
               containerClassName={'pagination'}
+              forcePage={page - 1}
+              disableInitialCallback={false}
+              marginPagesDisplayed={2}
+              nextLabel={'next'}
+              onPageChange={handlePageClick}
+              previousLabel={'previous'}
+              pageCount={lastPage}
+              pageRangeDisplayed={5}
               subContainerClassName={'pages pagination'}
-              activeClassName={'active'}
             />
           </div>
         </React.Fragment>

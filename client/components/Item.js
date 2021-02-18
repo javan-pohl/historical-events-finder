@@ -6,7 +6,7 @@ const Item = ({item}) => {
   if (description.indexOf('ampamp') != -1) {
     description = description.substring(0, description.indexOf('ampamp'));
   }
-  console.log('item: ', item);
+  // console.log('item: ', item);
   return (
     <div className="event flex-parent flex-column" >
        <div className="event-row event-date-row flex-parent flex-row">
