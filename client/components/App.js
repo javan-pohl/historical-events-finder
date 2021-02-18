@@ -7,22 +7,31 @@ function App() {
   const [page, setPage] = useState(1);
   const [ready, setReady] = useState(false);
   const [perPage, setPerPage] = useState(8);
+  const [lastPage, setLastPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
   function fetchResults() {
-    // will need to reconfigure to include searchterm but let's test first
-    // let query = `http://localhost:3000/posts?date=-300`;
-    // let query = `http://localhost:3000/posts?_page=${page}&_limit=${perPage}q=${searchTerm}`;
     let query = `http://localhost:3000/posts?q=${searchTerm}&_page=${page}&_limit=${perPage}`;
-    console.log('query: ', query);
     axios.get(query)
       .then(data => {
         console.log('search results: ', data);
         setSearchResults(data.data);
-        setReady(true);
+        // setReady(true);
+        getLastPage(data.headers.link);
       })
       .catch(err => console.log('fetch error: ', err));
+  }
+  
+  function getLastPage(headerLink) {
+    console.log('headerLink: ', headerLink);
+    let arr = headerLink.split(',');
+    console.log('header arr: ', arr);
+    let str = arr[2].substring(arr[2].indexOf('page=') + 5, arr[2].indexOf('&_limit'));
+    console.log('str: ', str);
+    console.log(parseInt(str))
+    setLastPage(parseInt(str))
+    setReady(true);
   }
 
   function handleSearchChange(e) {
@@ -59,7 +68,7 @@ function App() {
           onChange={handleSearchChange}
           onSubmit={handleSubmit}      
           display={ready}
-          />
+        />
       )
     }
   }

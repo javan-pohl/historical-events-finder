@@ -1,6 +1,11 @@
 import React from 'react';
 
 const Item = ({item}) => {
+  const regex = /(<([^>]+)>)/ig;
+  let description = '' + item.description.replace(regex, '');
+  if (description.indexOf('ampamp') != -1) {
+    description = description.substring(0, description.indexOf('ampamp'));
+  }
   console.log('item: ', item);
   return (
     <div className="event flex-parent flex-column" >
@@ -17,7 +22,7 @@ const Item = ({item}) => {
           Desc:
         </div>
         <div className="event-desc margin-left-15px">
-          {item.description}
+          {description}
         </div>
        </div>
        <div className="event-row event-topic-row flex-parent flex-row">
