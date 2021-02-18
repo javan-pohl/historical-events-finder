@@ -2,6 +2,7 @@ import React, { useState, Fragment } from 'react';
 import axios from 'axios';
 import Search from './Search.js';
 import List from './List.js';
+import ReactPaginate from 'react-paginate';
 
 function App() {
   const [page, setPage] = useState(1);
@@ -24,14 +25,18 @@ function App() {
   }
   
   function getLastPage(headerLink) {
-    console.log('headerLink: ', headerLink);
+    // console.log('headerLink: ', headerLink);
     let arr = headerLink.split(',');
-    console.log('header arr: ', arr);
+    // console.log('header arr: ', arr);
     let str = arr[2].substring(arr[2].indexOf('page=') + 5, arr[2].indexOf('&_limit'));
-    console.log('str: ', str);
-    console.log(parseInt(str))
+    // console.log('str: ', str);
+    // console.log(parseInt(str))
     setLastPage(parseInt(str))
     setReady(true);
+  }
+  
+  function handlePageClick(data) {
+    console.log('page clicked: ', data.selected + 1);
   }
 
   function handleSearchChange(e) {
@@ -59,6 +64,21 @@ function App() {
             list={searchResults}
             display={ready}
           />
+          <div className="pagination-main">
+          <ReactPaginate
+              previousLabel={'previous'}
+              nextLabel={'next'}
+              breakLabel={'...'}
+              breakClassName={'break-me'}
+              pageCount={lastPage}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={handlePageClick}
+              containerClassName={'pagination'}
+              subContainerClassName={'pages pagination'}
+              activeClassName={'active'}
+            />
+          </div>
         </React.Fragment>
       )
     } else {
